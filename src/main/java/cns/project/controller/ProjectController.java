@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
-@RequestMapping("/project/")
+@RequestMapping("/project")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
@@ -51,11 +53,21 @@ public class ProjectController {
 //        return projectService.saveProject(project);
 //    }
 
-    @PostMapping("/add")
-    public String saveProject(@Valid @ModelAttribute("project") Project project) {
-        System.out.println("project: " + project);
+    @GetMapping("/add")
+    public String addProject(Model model) {
+        model.addAttribute("project", new Project());
+        return "new-project";
+    }
 
-        return "register";
-//        return projectService.saveProject(project);
+    @PostMapping("/save-project")
+    public String saveProject(@ModelAttribute("project") @Valid Project project, HttpSession session) {
+        Logger logger = Logger.getLogger(ProjectController.class.getName());
+        logger.info("Project: " + project);
+        System.out.println("Project: " + project);
+        User owner = (User) session.getAttribute("user");
+        System.out.println("owner: " + owner);
+        project.setOwner(owner);
+        projectService.saveProject(project);
+        return "redirect:/project/list";
     }
 }

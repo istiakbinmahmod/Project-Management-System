@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +19,6 @@ import java.util.Set;
 @Builder
 public class Project {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long projectId;
@@ -26,17 +26,24 @@ public class Project {
     @NotBlank(message = "Please Add Project Name")
     private String projectName;
 
+    //    @NotEmpty(message = "Please Add Project Owner")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "owner_id", nullable = true)
+    private User owner;
+
     @NotBlank(message = "Please Add Project Intro")
     private String projectIntro;
 
     @NotEmpty(message = "Please Add Project Status")
     private String status;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    //    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
-    @NotEmpty(message = "Please Add Project End Date")
-    @Temporal(TemporalType.TIMESTAMP)
+    //    @NotEmpty(message = "Please Add Project End Date")
+//    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     @ManyToMany(

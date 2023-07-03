@@ -15,7 +15,7 @@
         <div class="card-body">
             <div class="col-md-10">
                 <form action="#" method="post"
-                      th:action="@{/project/add}" th:object="${project}" class="needs-validation" novalidate>
+                      th:action="@{/project/save-project}" th:object="${project}" class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="projectName" class="form-label">Project Name</label>
                         <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" th:field="*{projectName}" required>
@@ -56,6 +56,7 @@
                             Please provide the project end date.
                         </div>
                     </div>
+
                     <div class="mb-3">
                         <label for="users" class="form-label">Add Users (Maximum 5)</label>
                         <select class="form-select" id="users" name="users" th:object="${users}" multiple>

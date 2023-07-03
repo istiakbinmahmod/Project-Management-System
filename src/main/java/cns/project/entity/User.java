@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -30,6 +31,7 @@ public class User {
 
     @NotBlank(message = "Please provide email")
     @Email
+    @Column(unique = true)
     private String email;
 
     @NotBlank(message = "Please provide password")

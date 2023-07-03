@@ -14,17 +14,17 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-10">
-                <form action="#" method="post" th:action="@{/login}" class="needs-validation" novalidate>
+                <form action="#" method="post" th:action="@{/user/login}" th:object="${loginInfo}" class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email"  required>
+                        <input type="email" class="form-control" id="email" placeholder="Email" th:field="*{email}" required>
                         <div class="invalid-feedback">
                             Please provide a valid email address.
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                        <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" required>
                         <div class="invalid-feedback">
                             Please provide your password.
                         </div>

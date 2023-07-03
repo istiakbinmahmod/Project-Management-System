@@ -15,7 +15,7 @@
     <div class="card-body">
       <div class="col-md-10">
         <form action="#" method="post"
-              th:action="@{/user/save-us}" th:object="${newUser}" class="needs-validation" novalidate>
+              th:action="@{/user/save-user}" th:object="${newUser}" class="needs-validation" novalidate>
           <div class="mb-3">
             <label for="firstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}" required>

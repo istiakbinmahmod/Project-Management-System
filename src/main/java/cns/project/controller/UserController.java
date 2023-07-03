@@ -2,6 +2,7 @@ package cns.project.controller;
 
 import cns.project.entity.Project;
 import cns.project.entity.User;
+import cns.project.form.LoginInfo;
 import cns.project.service.ProjectService;
 import cns.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,20 @@ public class UserController {
     private ProjectService projectService;
 
     @GetMapping({"/login", "/"})
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("loginInfo", new LoginInfo());
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-        User user = userService.login(email, password);
-        if (user != null) {
-            session.setAttribute("user", user);
+    public String login(@ModelAttribute("loginInfo") @Valid LoginInfo info, Model model, HttpSession session) {
+//        System.out.println("email: " + user.getEmail());
+//        System.out.println("password: " + user.getPassword());
+        User val_user = userService.login(info.getEmail(), info.getPassword());
+        System.out.println("val_user: " + val_user);
+
+        if (val_user != null) {
+            session.setAttribute("user", val_user);
             return "redirect:/project/list";
         } else {
             model.addAttribute("error", "Invalid Credentials");
@@ -48,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/save-user")
-    public String saveUser(@ModelAttribute("newUser") @Valid User user, Model model, HttpSession session) {
+    public String saveUser(@ModelAttribute("newUser") @Valid User user, HttpSession session) {
         Logger logger = Logger.getLogger(UserController.class.getName());
         logger.info("User: " + user);
         userService.saveUser(user);
