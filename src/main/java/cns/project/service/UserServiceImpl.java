@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
     public User fetchUserByFirstNameIgnoreCase(String firstName) {
         return null;
     }
+
+    @Override
+    public User login(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
 }

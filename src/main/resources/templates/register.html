@@ -14,31 +14,32 @@
   <div class="card">
     <div class="card-body">
       <div class="col-md-10">
-        <form action="#" method="post" th:action="@{/login}" class="needs-validation" novalidate>
+        <form action="#" method="post"
+              th:action="@{/user/save-us}" th:object="${newUser}" class="needs-validation" novalidate>
           <div class="mb-3">
             <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}" required>
             <div class="invalid-feedback">
               Please provide your first name.
             </div>
           </div>
           <div class="mb-3">
             <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name" th:field="*{lastName}" required>
             <div class="invalid-feedback">
               Please provide your last name.
             </div>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email"  required>
+            <input type="email" class="form-control" id="email" placeholder="Email" th:field="*{email}" required>
             <div class="invalid-feedback">
               Please provide a valid email address.
             </div>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" required>
+            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" required>
             <div class="invalid-feedback">
               Please provide a password.
             </div>

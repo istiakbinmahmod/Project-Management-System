@@ -23,4 +23,5 @@ public interface UserService {
 
     public User fetchUserByFirstNameIgnoreCase(String firstName);
 
+    public User login(String email, String password);
 }
