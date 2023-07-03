@@ -32,6 +32,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("loginInfo") @Valid LoginInfo info, Model model, HttpSession session) {
+        System.out.println("info: " + info);
 //        System.out.println("email: " + user.getEmail());
 //        System.out.println("password: " + user.getPassword());
         User val_user = userService.login(info.getEmail(), info.getPassword());
